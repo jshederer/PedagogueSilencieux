@@ -1,0 +1,87 @@
+var titre="Initiation Python";
+var message="Bienvenue chez Pédagogue Silencieux...";
+var questions=[
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(0 , 10); \
+				var b = getRandomIntInclusive(0 , 10); \
+				result=a+b; \
+				lib_q=a+'+'+b; \
+				", 
+		lib_q:"",
+		lib_r:"=?",
+		r:false,
+		aide:"Addition",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-5 , 5); \
+				var b = getRandomIntInclusive(0 , 10); \
+				result=a*b; \
+				lib_q=a+'*'+b; \
+				", 
+		lib_q:"",
+		lib_r:"=?",
+		r:false,
+		aide:"Multiplication",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-10 , 10); \
+				result=a; \
+				lib_q='a='+a; \
+				", 
+		lib_q:"",
+		lib_r:"a=",
+		r:false,
+		aide:"Affectation d'une variable, valeur de la variable",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-5 , 5); \
+				var b = getRandomIntInclusive(0 , 10); \
+				result=b; \
+				lib_q='a='+a+'<br/>b='+b;\
+				", 
+		lib_q:"",
+		lib_r:"b=",
+		r:false,
+		aide:"Affectation de 2 variables, valeur d'une variable",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-5 , 5); \
+				var b = getRandomIntInclusive(0 , 10); \
+				result=a+b; \
+				lib_q='a='+a+'<br/>c=a+'+b;\
+				", 
+		lib_q:"",
+		lib_r:"c=",
+		r:false,
+		aide:"Affectation de 1 variable et addition, valeur de la variable",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-5 , 5); \
+				var b = getRandomIntInclusive(0 , 10); \
+				result=a+b; \
+				lib_q='a='+a+'<br/>b='+b;\
+				", 
+		lib_q:"",
+		lib_r:"a+b=",
+		r:false,
+		aide:"Affectation de 2 variables, valeur de l'addition",
+		correction:true
+	},
+];
