@@ -1,6 +1,5 @@
 body {
   background-color: #C4DFFF;
-  margin: 15px;
   font-family: "Monaco", "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 }
 
@@ -16,10 +15,12 @@ div#content {
 
 div#gauche {
   float: left;
-  background-color: #2D588C;
-  margin: 5px;
-  padding:5px;
-  height:100%;
+  background-color: #547FB2;
+  margin: 1% 0.5% 1% 1%;
+  padding: 0.5%;
+  width: 20%;
+  position: fixed;
+  left: 0%;
 }
 div#logo {
   margin: auto;
@@ -36,8 +37,11 @@ div#titre {
 div#principal {
   float:left;
   background-color: #547FB2;
-  margin: 5px;
-  width:75%;
+  margin: 1% 1% 1% 0.5%;
+  padding:0.5% 0.5% 30% 0.5%;
+  width: 75%;
+  position: absolute;
+  right: 0%
 }
 
 div.conteneur{
@@ -93,4 +97,5 @@ span.correction, span.tristesse, span.sourire {
 div.resume {
   background-color: #C4DFFF;
   margin: 10px;
+  padding: 10px;
 }

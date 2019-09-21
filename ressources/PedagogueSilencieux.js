@@ -17,21 +17,18 @@ function ajouterQuestion(){
 	result = false;
 	script=false;
 	lib_q = "";
-	while(questions[numero]['script']!="") {
+	if(questions[numero]['script']!="") {
 		try {
 			eval(questions[numero]['script']);
 			script=true;
-			break;
 		}
 		catch(error) {
-			if(numero<questions.length)
-				numero+=1;
-			else
-				break;
+			console.log("Erreur de script sur question:"+numero);
 			console.error(error);
-			console.error(error);
+			return false;
 		}
 	}
+	
 	//Ajout des champs de gestion question
 	var conteneur = $('<div/>', {class: "conteneur", id : "conteneur_"+occurence});
 	var box_q = $('<div/>', {class: "question", id : "question_"+occurence});
@@ -61,10 +58,25 @@ function ajouterQuestion(){
 	conteneur.addClass("actif");
 
 	box_input_r.focus();
+	$('html, body').animate({
+		scrollTop: conteneur.offset().top
+	}, 500);
 }
 
 function demarrrerQuestionnaire() {
 	ajouterQuestion();
+}
+
+function ajouterResume() {
+	var resume = $('<div/>', {class: "resume"});
+	var correctes = $('<div/>', {class: "correctes", text:"Réponses correctes:"+compteur_correctes});
+	var incorrectes = $('<div/>', {class: "incorrectes", text:"Réponses incorrectes:"+compteur_incorrectes});
+	resume.append(correctes);
+	resume.append(incorrectes);
+	$("#quizz").append(resume);
+	$('html, body').animate({
+		scrollTop: resume.offset().top
+	}, 500);
 }
 
 function verifier(value) {
@@ -91,12 +103,7 @@ function verifier(value) {
 			occurence+=1;
 			ajouterQuestion();
 		} else {
-			var resume = $('<div/>', {class: "resume"});
-			var correctes = $('<div/>', {class: "correctes", text:"Réponses correctes:"+compteur_correctes});
-			var incorrectes = $('<div/>', {class: "incorrectes", text:"Réponses incorrectes:"+compteur_incorrectes});
-			resume.append(correctes);
-			resume.append(incorrectes);
-			$("#quizz").append(resume);
+			ajouterResume();
 		}
 	} else {
 		compteur_incorrectes+=1;
@@ -107,19 +114,25 @@ function verifier(value) {
 		}
 		var tristesse = $('<span/>', {class: "tristesse", text:":("});
 		box_r_interface.append(tristesse);
-		occurence+=1;
 		//Boucle sur la question
 		boucle+=1;
 		if(questions[numero]['boucle']>boucle && questions[numero]['aide'] != "") {
 			if(boucle>=1)
 				aide = true;
+			occurence+=1;
+			ajouterQuestion();
 		} else {
 			//Fin de la boucle
 			boucle=0;
 			aide = false;
-			numero+=1;
+			if(numero<(questions.length-1)) {
+				numero+=1;
+				occurence+=1;
+				ajouterQuestion();
+			} else {
+				ajouterResume();
+			}
 		}
-		ajouterQuestion();
 	}
 	box_input_r.prop('disabled', true);
 	box_input_r.blur();
