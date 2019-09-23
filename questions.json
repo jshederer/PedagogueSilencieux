@@ -84,4 +84,32 @@ var questions=[
 		aide:"Affectation de 2 variables, valeur de l'addition",
 		correction:true
 	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-20 , 20); \
+				var b = getRandomIntInclusive(-5 , 10); \
+				result=a*b; \
+				lib_q='a='+a+'<br/>b='+b+'<br/>c=a*b';\
+				", 
+		lib_q:"",
+		lib_r:"c=",
+		r:false,
+		aide:"Affectation de 2 variables, multiplication dans 1 troisième variable",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-20 , 20); \
+				var b = getRandomIntInclusive(-5 , 10); \
+				if(a<0) {result=b;} else {result=a;} \
+				lib_q='a='+a+'<br/>b='+b+'<br/>if a <0:<br/>    c=b<br/>else:<br/>    c=a';\
+				", 
+		lib_q:"",
+		lib_r:"c=",
+		r:false,
+		aide:"Affectation de 2 variables, affectation d'une troisième variable avec test",
+		correction:true
+	},
 ];
