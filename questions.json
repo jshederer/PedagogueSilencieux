@@ -104,12 +104,54 @@ var questions=[
 				var a = getRandomIntInclusive(-20 , 20); \
 				var b = getRandomIntInclusive(-5 , 10); \
 				if(a<0) {result=b;} else {result=a;} \
-				lib_q='a='+a+'<br/>b='+b+'<br/>if a <0:<br/>    c=b<br/>else:<br/>    c=a';\
+				lib_q='a='+a+'<br/>b='+b+'<br/>if a <0:<br/>&nbsp;&nbsp;&nbsp;&nbsp;c=b<br/>else:<br/>&nbsp;&nbsp;&nbsp;&nbsp;c=a';\
 				", 
 		lib_q:"",
 		lib_r:"c=",
 		r:false,
 		aide:"Affectation de 2 variables, affectation d'une troisième variable avec test",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomStringAlphabetShort(2); \
+				var b = getRandomStringAlphabetShort(2); \
+				result='\\''+a+b+'\\''; \
+				lib_q='a=\\''+a+'\\'<br/>c=a+\\''+b+'\\'';\
+				", 
+		lib_q:"",
+		lib_r:"c=",
+		r:false,
+		aide:"Affectation de 1 variable avec une chaîne de caractère et addition, valeur de la variable",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomStringAlphabetShort(2); \
+				var b = getRandomStringAlphabetShort(2); \
+				result='\\''+b+a+'\\''; \
+				lib_q='a=\\''+a+'\\'<br/>b=\\''+b+'\\'<br/>c=b+a';\
+				", 
+		lib_q:"",
+		lib_r:"c=",
+		r:false,
+		aide:"Affectation de 2 variable avec une chaîne de caractère et addition, valeur de la variable",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomStringNum(2); \
+				var b = getRandomStringNum(2); \
+				result='\\''+a+b+'\\''; \
+				lib_q='a=\\''+a+'\\'<br/>b=\\''+b+'\\'<br/>c=a+b';\
+				", 
+		lib_q:"",
+		lib_r:"c=",
+		r:false,
+		aide:"Affectation de 2 variable avec une chaîne de caractère et addition, valeur de la variable",
 		correction:true
 	},
 ];
