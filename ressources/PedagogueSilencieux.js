@@ -2,19 +2,33 @@
 //Variables globales de gestion du quizz
 var numero = 0;
 var occurence = 0;
-var compteur_correctes = 0;
-var compteur_incorrectes = 0;
 var boucle=0;
 var aide = false;
-var result=false;
+var resultat=false;
 var script=false;
 var lib_q="";
-//var time = new TimelineLite({paused:true});
+
+//Variables globales de gestion de la réussite
+var compteur_correctes = 0;
+var compteur_incorrectes = 0;
+var score=0.00
+var temps=[];
+var temps_question=0.00;
+var delai_question=0.00;
+
+//Variables globales de gestion de la rémanence des données+console supervision
+var DB = new PouchDB('PedagogueSilencieuxDB', {auto_compaction: true});
+var DB_ID = "";
+var DB_date = new Date().toISOString();
+var DB_revision =false;
+var reprise = false;
+var DB_remoteCouch = false;
+var DB_murmur = "";
 
 //Fonctions du quizz
 function ajouterQuestion(){
 	//Gestion d'un script de question/réponse et d'une éventuelle erreur sur le script d'une question
-	result = false;
+	resultat = false;
 	script=false;
 	lib_q = "";
 	if(questions[numero]['script']!="") {
@@ -34,9 +48,12 @@ function ajouterQuestion(){
 	var box_q = $('<div/>', {class: "question", id : "question_"+occurence});
 	var box_lib_q = $('<div/>', {class: "lib_q", id : "lib_q_"+occurence, html:questions[numero]['lib_q']+lib_q});
 	box_q.append(box_lib_q);
-	if(questions[numero]['boucle']<=1 && questions[numero]['aide']!="") 
+	if(questions[numero]['boucle']<=1) {
+		//Affichage de l'aide si on ne passe qu'une seule fois sur la question
 		aide = true;
-	if(aide) {
+	}
+	if(aide && questions[numero]['aide']!="") {
+		//Affichage de l'aide si elle n'est pas vide
 		var box_aide = $('<div/>', {class: "aide", id : "aide_"+occurence, text:questions[numero]['aide'] });
 		box_q.append(box_aide);
 		aide = false;
@@ -61,10 +78,40 @@ function ajouterQuestion(){
 	$('html, body').animate({
 		scrollTop: conteneur.offset().top
 	}, 500);
+	temps_question = Date.now();
 }
 
 function demarrrerQuestionnaire() {
-	ajouterQuestion();
+	DB.allDocs({include_docs: true, descending: true}, function(erreur, donnees) {
+		if(erreur)
+			console.error(erreur);
+
+		var element={};
+		for(element of donnees.rows) {
+			console.log(element);
+			if(element.doc.questions_id == questions_id && element.doc.questions_version_id == questions_version_id) {
+				if(element.doc.etat!='Fin') {
+					//Reprise du questionnaire
+					reprise = true;
+					DB_ID = element.doc._id
+					DB_revision = element.doc._rev;
+					numero = element.doc.numero;
+					occurence =  element.doc.occurence;
+					boucle = element.doc.boucle;
+					aide = element.doc.aide;
+					score = element.doc.score;
+					compteur_correctes = element.doc.compteur_correctes;
+					compteur_incorrectes = element.doc.compteur_incorrectes;
+					temps = element.doc.temps;
+
+					$("#titre").text(titre+" (Reprise)");
+					document.title = titre+" (Reprise)";
+				}
+				break;
+			}
+		}
+		ajouterQuestion();
+	});
 }
 
 function ajouterResume() {
@@ -79,7 +126,14 @@ function ajouterResume() {
 	}, 500);
 }
 
+function ajouterTemps(numero_question, reponse_correcte) {
+	temps.push({'delai': delai_question, 'numero_question':numero_question, 'correcte': reponse_correcte});
+}
+
 function verifier(value) {
+	delai_question = Date.now() - temps_question;
+	var etat = 'En cours';
+	//Désactivation conteneur
 	$("#conteneur_"+occurence).removeClass("actif");
 	var box_r_interface = $("#r_interface_"+occurence);
 	var box_input_r = $("#input_"+occurence);
@@ -90,58 +144,128 @@ function verifier(value) {
 	if(questions[numero]['r']!==false)
 		attendu=questions[numero]['r']
 	else
-		attendu=result;
+		attendu=resultat;
 	
 	if(value==attendu) {
+		//Réponse correcte
 		compteur_correctes+=1;
+
 		box_input_r.addClass("sourire");
 		var sourire = $('<span/>', {class: "sourire", text:":)"});
 		box_r_interface.append(sourire);
+
+		score += 1-boucle/questions[numero]['boucle'];
+		boucle=0;
 		aide = false;
+		
+		ajouterTemps(numero,true);
+
 		if(numero<(questions.length-1)) {
+			//Il reste des questions
 			numero+=1;
 			occurence+=1;
 			ajouterQuestion();
 		} else {
+			etat = 'Fin';
 			ajouterResume();
 		}
 	} else {
+		//Réponse incorrecte
 		compteur_incorrectes+=1;
+
 		box_input_r.addClass("tristesse");
+		//Affichage de la correction si cela est configuré sur la question
 		if(questions[numero]['correction']===true) {
 			var correction = $('<span/>', {class: "correction", text:"=>"+attendu});
 			box_r_interface.append(correction);
 		}
 		var tristesse = $('<span/>', {class: "tristesse", text:":("});
 		box_r_interface.append(tristesse);
+
+		ajouterTemps(numero,false);
+
 		//Boucle sur la question
 		boucle+=1;
-		if(questions[numero]['boucle']>boucle && questions[numero]['aide'] != "") {
-			if(boucle>=1)
-				aide = true;
+		if(questions[numero]['boucle']>boucle) {
+			//On réaffiche la même question autant de fois que configuré sur la question
+			aide = true;
 			occurence+=1;
 			ajouterQuestion();
 		} else {
-			//Fin de la boucle
+			//Fin de la boucle, réinitialisations
 			boucle=0;
 			aide = false;
+
 			if(numero<(questions.length-1)) {
+				//Il reste des questions
 				numero+=1;
 				occurence+=1;
 				ajouterQuestion();
 			} else {
+				etat = 'Fin';
 				ajouterResume();
 			}
 		}
 	}
+	//Désactivation du champ de réponse et retrait du focus
 	box_input_r.prop('disabled', true);
 	box_input_r.blur();
+	
+	//Gestion DB
+	var donnees = {
+		questions_id: questions_id,
+		questions_version_id: questions_version_id,
+		numero: numero,
+		occurence: occurence,
+		boucle: boucle,
+		aide: aide,
+		compteur_correctes: compteur_correctes,
+		compteur_incorrectes: compteur_incorrectes,
+		score: score,
+		temps: temps,
+		etat: etat
+	};
+	if(reprise!==false) {
+		donnees._id = DB_ID;
+		donnees._rev = DB_revision;
+	} else {
+		donnees._id = DB_date+DB_murmur;
+
+	}
+	DB.put(donnees,function callback(error, result) {
+		if (error) {
+			console.log("Pb sauvegarde DB"+DB_revision);
+			console.log(error);
+		} else {
+			DB_revision = result.rev;
+			console.log("Sauvegarde DB ok"+DB_revision);
+		}
+	});
 	console.log("Réponses correctes:"+compteur_correctes);
 	console.log("Réponses incorrectes:"+compteur_incorrectes);
+	console.log("Score:"+score);
 }
 
 window.onload = function(e) {
-	console.log("Window onload start");
+	console.log("Début lancement Pédagogue Silencieux");
+	if (window.requestIdleCallback) {
+		requestIdleCallback(function () {
+			Fingerprint2.get(function (components) {
+				var values = components.map(function (component) { return component.value });
+				DB_murmur = Fingerprint2.x64hash128(values.join(''), 31);
+				console.log(DB_murmur);
+			})
+		})
+	} else {
+		setTimeout(function () {
+			Fingerprint2.get(function (components) {
+				var values = components.map(function (component) { return component.value });
+				DB_murmur = Fingerprint2.x64hash128(values.join(''), 31);
+				console.log(DB_murmur);
+			})  
+		}, 500)
+	}
+	
 	try {
 		$("#titre").text(titre);
 		document.title = titre;
@@ -157,6 +281,7 @@ window.onload = function(e) {
 		console.error("Message invalide");
 		console.error(error);
 	}
+
 	try {
 		console.log("Nombre de questions chargées:"+questions.length);
 		demarrrerQuestionnaire();
@@ -165,5 +290,6 @@ window.onload = function(e) {
 		console.error("Questions non chargées");
 		console.error(error);
 	}
-	console.log("Window onload stop");
+	
+	console.log("Fin lancement Pédagogue silencieux");
 }
