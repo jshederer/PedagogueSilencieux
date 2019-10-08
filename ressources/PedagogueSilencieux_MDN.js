@@ -7,7 +7,13 @@ function getRandom() {
 // On renvoie un nombre aléatoire entre une valeur min (incluse) 
 // et une valeur max (exclue)
 function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
+  return getRandom() * (max - min) + min;
+}
+
+// On renvoie un nombre aléatoire entre une valeur min (incluse) 
+// et une valeur max (exclue)
+function getRandomArbitraryRound(min, max,decimales) {
+  return parseFloat((getRandom() * (max - min) + min).toFixed(decimales));
 }
 
 // On renvoie un entier aléatoire entre une valeur min (incluse)
@@ -17,7 +23,7 @@ function getRandomArbitrary(min, max) {
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(getRandom() * (max - min)) + min;
 }
 
 // On renvoie un entier aléatoire entre une valeur min (incluse)
@@ -27,5 +33,10 @@ function getRandomInt(min, max) {
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min +1)) + min;
+  return Math.floor(getRandom() * (max - min +1)) + min;
+}
+
+// Arrondi
+function getRound(nombre,decimales) {
+  return parseFloat(nombre).toFixed(decimales);
 }

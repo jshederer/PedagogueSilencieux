@@ -1,32 +1,32 @@
 // Fonctions de chaîne de caractères aléatoire
-function getRandomString(possible,length) {
+function getRandomString(possible,longueur) {
   var texte=[];
-  for (var i = 0; i < length; i++)
+  for (var i = 0; i < longueur; i++)
     texte[i] = possible.charAt(Math.floor(Math.random() * possible.length));
   return texte.join('');
 }
 
-function getRandomStringAlphabetShort(length) {
+function getRandomStringAlphabetShort(longueur) {
 	var possible = "abcdefghijklmnopqrstuvwxyz";
-	return getRandomString(possible,length);
+	return getRandomString(possible,longueur);
 }
 
-function getRandomStringAlphabet(length) {
+function getRandomStringAlphabet(longueur) {
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	return getRandomString(possible,length);
+	return getRandomString(possible,longueur);
 }
 
-function getRandomStringNum(length) {
+function getRandomStringNum(longueur) {
 	var possible = "0123456789";
-	return getRandomString(possible,length);
+	return getRandomString(possible,longueur);
 }
 
-function getRandomStringAlphaNum(length) {
+function getRandomStringAlphaNum(longueur) {
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	return getRandomString(possible,length);
+	return getRandomString(possible,longueur);
 }
 
-function getRandomStringComplet(length) {
+function getRandomStringComplet(longueur) {
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.:;,?/!()";
-	return getRandomString(possible,length);
+	return getRandomString(possible,longueur);
 }

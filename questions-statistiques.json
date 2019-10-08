@@ -1,11 +1,11 @@
-0var titre="Initiation Python";
+var titre="Statistiques-Diagnostic Seconde Professionnelle";
 var message="Bienvenue chez Pédagogue Silencieux...";
-var questions_id = "Python";
-var questions_version_id = "0.1.2";
+var questions_id = "Statistiques Seconde Professionnelle";
+var questions_version_id = "0.1.0";
 
 var questions=[
 	{
-		boucle: 3, 
+		boucle: 1,
 		script: "\
 				var a = getRandomIntInclusive(0 , 10); \
 				var b = getRandomIntInclusive(0 , 10); \
@@ -90,48 +90,6 @@ var questions=[
 	{
 		boucle: 3, 
 		script: "\
-				var a = getRandomIntInclusive(-5 , 3); \
-				var b = getRandomIntInclusive(1 , 8); \
-				resultat=a-b; \
-				lib_q='a='+a+'<br/>b='+b;\
-				", 
-		lib_q:"",
-		lib_r:"a-b=",
-		r:false,
-		aide:"Affectation de 2 variables, valeur de la soustraction",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 5); \
-				var b = getRandomIntInclusive(-1 , 6); \
-				resultat=a+b; \
-				lib_q='a='+a+'<br/>b='+b+'<br/>c=a+b';\
-				",
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 2 variables, addition dans une troisième",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 3); \
-				var b = getRandomIntInclusive(1 , 8); \
-				resultat=a-b; \
-				lib_q='a='+a+'<br/>b='+b+'<br/>c=a-b';\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 2 variables, soustraction dans une troisième",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
 				var a = getRandomIntInclusive(-20 , 20); \
 				var b = getRandomIntInclusive(-5 , 10); \
 				resultat=a*b; \
@@ -197,6 +155,19 @@ var questions=[
 		lib_r:"c=",
 		r:false,
 		aide:"Affectation de 2 variables, affectation d'une troisième variable avec test",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-30 , 40); \
+				resultat=a; \
+				lib_q='def ChoixNum():<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '+a+'<br/>a=ChoixNum()';\
+				", 
+		lib_q:"",
+		lib_r:"a=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction",
 		correction:true
 	},
 ];

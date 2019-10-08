@@ -1,0 +1,20 @@
+var titre="Initiation Python";
+var message="Bienvenue chez Pédagogue Silencieux...";
+var questions_id = "Python 2";
+var questions_version_id = "0.1.0";
+
+var questions=[
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-30 , 40); \
+				resultat=a; \
+				lib_q='def ChoixNum():<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '+a+'<br/>a=ChoixNum()';\
+				",
+		lib_q:"",
+		lib_r:"a=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction",
+		correction:true
+	},
+];
