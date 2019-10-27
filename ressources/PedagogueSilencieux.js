@@ -25,6 +25,47 @@ var reprise = false;
 var DB_remoteCouch = false;
 var DB_murmur = "";
 
+//Lecture des paramètres de page
+var resultat = [];
+var tmp = [];
+//location: Variable globale
+location.search
+	.substr(1)
+	.split("&")
+	.forEach(function (item) {
+		tmp = item.split("=");
+		resultat[tmp[0]] = decodeURIComponent(tmp[1]);
+	});
+
+var fichier_parametre = false;
+for(var index in resultat) {
+	if(index == "file") {
+		$.getScript(resultat[index])
+			.done(function( script, textStatus ) {
+				console.log( textStatus );
+				fichier_parametre = true;
+			})
+			.fail(function( jqxhr, settings, exception ) {
+				$("#quizz").append("Problème de chargement des questions");
+				$("#quizz").append(exception);
+				console.log( settings );
+			});
+	}
+}
+
+if(!fichier_parametre) {
+	$.getScript("./questions.json")
+		.done(function( script, textStatus ) {
+			console.log( textStatus );
+			fichier_parametre = true;
+		})
+		.fail(function( jqxhr, settings, exception ) {
+			$("#quizz").append("Problème de chargement des questions");
+			$("#quizz").append(exception);
+			console.log( settings );
+		});
+}
+
 //Fonctions du quizz
 function ajouterQuestion(){
 	//Gestion d'un script de question/réponse et d'une éventuelle erreur sur le script d'une question
