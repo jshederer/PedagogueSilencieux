@@ -1,202 +1,46 @@
-0var titre="Initiation Python";
-var message="Bienvenue chez Pédagogue Silencieux...";
-var questions_id = "Python";
-var questions_version_id = "0.1.2";
+var titre_questionnaire="Initiation Python-Fonctions à un paramètre";
+var message_questionnaire="Bienvenue chez Pédagogue Silencieux...";
+var questions_id = "Python 2";
+var questions_version_id = "0.1.0";
 
 var questions=[
 	{
 		boucle: 3, 
 		script: "\
-				var a = getRandomIntInclusive(0 , 10); \
-				var b = getRandomIntInclusive(0 , 10); \
-				resultat=a+b; \
-				lib_q=a+'+'+b; \
-				", 
-		lib_q:"",
-		lib_r:"=?",
-		r:false,
-		aide:"Addition",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 5); \
-				var b = getRandomIntInclusive(0 , 10); \
-				resultat=a*b; \
-				lib_q=a+'*'+b; \
-				", 
-		lib_q:"",
-		lib_r:"=?",
-		r:false,
-		aide:"Multiplication",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-10 , 10); \
+				var a = getRandomIntInclusive(-30 , 40); \
 				resultat=a; \
-				lib_q='a='+a; \
-				", 
+				lib_q='def ChoixNum():<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '+a+'<br/>a=ChoixNum()';\
+				",
 		lib_q:"",
 		lib_r:"a=",
 		r:false,
-		aide:"Affectation d'une variable, valeur de la variable",
+		aide:"Affectation de 1 variable avec le retour d'une fonction",
 		correction:true
 	},
 	{
 		boucle: 3, 
 		script: "\
-				var a = getRandomIntInclusive(-5 , 5); \
-				var b = getRandomIntInclusive(0 , 10); \
-				resultat=b; \
-				lib_q='a='+a+'<br/>b='+b;\
-				", 
-		lib_q:"",
-		lib_r:"b=",
-		r:false,
-		aide:"Affectation de 2 variables, valeur d'une variable",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 5); \
-				var b = getRandomIntInclusive(0 , 10); \
-				resultat=a+b; \
-				lib_q='a='+a+'<br/>c=a+'+b;\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 1 variable et addition, valeur de la variable",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 5); \
-				var b = getRandomIntInclusive(0 , 10); \
-				resultat=a+b; \
-				lib_q='a='+a+'<br/>b='+b;\
-				", 
-		lib_q:"",
-		lib_r:"a+b=",
-		r:false,
-		aide:"Affectation de 2 variables, valeur de l'addition",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 3); \
-				var b = getRandomIntInclusive(1 , 8); \
-				resultat=a-b; \
-				lib_q='a='+a+'<br/>b='+b;\
-				", 
-		lib_q:"",
-		lib_r:"a-b=",
-		r:false,
-		aide:"Affectation de 2 variables, valeur de la soustraction",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-5 , 5); \
-				var b = getRandomIntInclusive(-1 , 6); \
-				resultat=a+b; \
-				lib_q='a='+a+'<br/>b='+b+'<br/>c=a+b';\
+				var a = getRandomIntInclusive(-15 , 15); \
+				resultat=a**2; \
+				lib_q='def Carré():<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '+a+'**2<br/>a=Carré()';\
 				",
 		lib_q:"",
-		lib_r:"c=",
+		lib_r:"a=",
 		r:false,
-		aide:"Affectation de 2 variables, addition dans une troisième",
+		aide:"Affectation de 1 variable avec le retour d'une fonction",
 		correction:true
 	},
 	{
 		boucle: 3, 
 		script: "\
-				var a = getRandomIntInclusive(-5 , 3); \
-				var b = getRandomIntInclusive(1 , 8); \
-				resultat=a-b; \
-				lib_q='a='+a+'<br/>b='+b+'<br/>c=a-b';\
-				", 
+				var a = getRandomIntInclusive(-30 , 40); \
+				resultat=a; \
+				lib_q='def ChoixNum():<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '+a+'<br/>a=ChoixNum()';\
+				",
 		lib_q:"",
-		lib_r:"c=",
+		lib_r:"a=",
 		r:false,
-		aide:"Affectation de 2 variables, soustraction dans une troisième",
+		aide:"Affectation de 1 variable avec le retour d'une fonction",
 		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-20 , 20); \
-				var b = getRandomIntInclusive(-5 , 10); \
-				resultat=a*b; \
-				lib_q='a='+a+'<br/>b='+b+'<br/>c=a*b';\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 2 variables, multiplication dans 1 troisième variable",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomStringAlphabetShort(2); \
-				var b = getRandomStringAlphabetShort(2); \
-				resultat='\\''+a+b+'\\''; \
-				lib_q='a=\\''+a+'\\'<br/>c=a+\\''+b+'\\'';\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 1 variable avec une chaîne de caractère et addition, valeur de la variable",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomStringAlphabetShort(2); \
-				var b = getRandomStringAlphabetShort(2); \
-				resultat='\\''+b+a+'\\''; \
-				lib_q='a=\\''+a+'\\'<br/>b=\\''+b+'\\'<br/>c=b+a';\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 2 variable avec une chaîne de caractère et addition, valeur de la variable",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomStringNum(2); \
-				var b = getRandomStringNum(2); \
-				resultat='\\''+a+b+'\\''; \
-				lib_q='a=\\''+a+'\\'<br/>b=\\''+b+'\\'<br/>c=a+b';\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 2 variable avec une chaîne de caractère et addition, valeur de la variable",
-		correction:true
-	},
-	{
-		boucle: 3, 
-		script: "\
-				var a = getRandomIntInclusive(-20 , 20); \
-				var b = getRandomIntInclusive(-5 , 10); \
-				if(a<0) {resultat=b;} else {resultat=a;} \
-				lib_q='a='+a+'<br/>b='+b+'<br/>if a < 0:<br/>&nbsp;&nbsp;&nbsp;&nbsp;c=b<br/>else:<br/>&nbsp;&nbsp;&nbsp;&nbsp;c=a';\
-				", 
-		lib_q:"",
-		lib_r:"c=",
-		r:false,
-		aide:"Affectation de 2 variables, affectation d'une troisième variable avec test",
-		correction:true
-	},
+	}
 ];

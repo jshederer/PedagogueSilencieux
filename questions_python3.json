@@ -1,0 +1,105 @@
+var titre_questionnaire="Initiation Python-Fonctions à 2 paramètres";
+var message_questionnaire="Bienvenue chez Pédagogue Silencieux...";
+var questions_id = "Python 3";
+var questions_version_id = "0.1.0";
+
+var questions=[
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(5 , 10); \
+				var b = getRandomIntInclusive(-10 , 10); \
+				resultat=a+b; \
+				lib_q='def Ajouter(a,b):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return a+b<br/>y=Ajouter('+a+' , '+b+')';\
+				", 
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables (addition)",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(5 , 10); \
+				var b = getRandomIntInclusive(-10 , 10); \
+				resultat=a-b; \
+				lib_q='def Soustraire(a,b):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return a-b<br/>y=Soustraire('+a+' , '+b+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables (soustraction)",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(5 , 10); \
+				var b = getRandomIntInclusive(-10 , 5); \
+				resultat=a*b; \
+				lib_q='def Multiplier(a,b):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return a*b<br/>y=Multiplier('+a+' , '+b+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-5 , 10); \
+				var b = getRandomIntInclusive(-10 , 5); \
+				resultat=(a+b)/2; \
+				lib_q='def Moyenne(a,b):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return (a+b)/2<br/>y=Moyenne('+a+' , '+b+')';\
+				", 
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomArbitraryRound(0 , 20, 1); \
+				var b = getRandomArbitraryRound(0 , 20, 1); \
+				resultat=getRound((a+b)/2 , 2); \
+				lib_q='def Moyenne(a,b):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return (a+b)/2<br/>y=Moyenne('+a+' , '+b+')';\
+				", 
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomArbitraryRound(5 , 7, 2); \
+				var b = getRandomArbitraryRound(-8 , -1, 2); \
+				resultat=getRound((a-b)*2 , 2); \
+				lib_q='def Fonction(a,b):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return (a-b)*2<br/>y=Fonction('+a+' , '+b+')';\
+				", 
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var x = getRandomArbitraryRound(5 , 7, 2); \
+				var y = getRandomArbitraryRound(-8 , -1, 2); \
+				resultat=getRound(0.5*(x+y) , 2); \
+				lib_q='def Espace(x,y):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 0.5*(x+y)<br/>z=Espace('+x+' , '+y+')';\
+				", 
+		lib_q:"",
+		lib_r:"z=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction à 2 variables (repère dans l'espace)",
+		correction:true
+	},
+];

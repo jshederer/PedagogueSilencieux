@@ -1,0 +1,176 @@
+var titre_questionnaire="Initiation Python-Fonctions à 1 paramètre";
+var message_questionnaire="Bienvenue chez Pédagogue Silencieux...";
+var questions_id = "Python 2";
+var questions_version_id = "0.1.0";
+
+var questions=[
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-30 , 40); \
+				resultat=a; \
+				lib_q='def ChoixNum():<br/>&nbsp;&nbsp;&nbsp;&nbsp;return '+a+'<br/>a=ChoixNum()';\
+				",
+		lib_q:"",
+		lib_r:"a=",
+		r:false,
+		aide:"Affectation de 1 variable avec le retour d'une fonction",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-6 , -3); \
+				resultat=3*a; \
+				lib_q='def f(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 3*x<br/>y=f('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction linéaire",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(2 , 6); \
+				resultat=3*a; \
+				lib_q='def f(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 3*x<br/>y=f('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction linéaire",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-6 , -3); \
+				resultat=2*a+5; \
+				lib_q='def g(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 2*x+5<br/>y=g('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction affine à coefficient directeur positif",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(2 , 6); \
+				resultat=2*a+5; \
+				lib_q='def g(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 2*x+5<br/>y=g('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction affine à coefficient directeur positif",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-6 , -3); \
+				resultat=-2*a+3; \
+				lib_q='def h(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return -2*x+3<br/>y=h('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction affine à coefficient directeur négatif",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(2 , 6); \
+				resultat=-2*a+3; \
+				lib_q='def h(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return -2*x+3<br/>y=h('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction affine à coefficient directeur négatif",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-6 , -3); \
+				resultat=a*a; \
+				lib_q='def k(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return x*x<br/>y=k('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction carré x²",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(2 , 6); \
+				resultat=a*a; \
+				lib_q='def k(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return x*x<br/>y=k('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction carré x²",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-6 , -3); \
+				resultat=-a*a; \
+				lib_q='def m(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return -x**2<br/>y=m('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction carré -x²",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(2 , 6); \
+				resultat=-a*a; \
+				lib_q='def m(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return -x**2<br/>y=m('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction carré -x²",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(-6 , -3); \
+				resultat=3*a*a+5; \
+				lib_q='def m(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 3*x**2+5<br/>y=m('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction carré 3x²+5",
+		correction:true
+	},
+	{
+		boucle: 3, 
+		script: "\
+				var a = getRandomIntInclusive(2 , 6); \
+				resultat=3*a*a+5; \
+				lib_q='def m(x):<br/>&nbsp;&nbsp;&nbsp;&nbsp;return 3*x**2+5<br/>y=m('+a+')';\
+				",
+		lib_q:"",
+		lib_r:"y=",
+		r:false,
+		aide:"Retour d'une fonction carré 3x²+5",
+		correction:true
+	},
+];

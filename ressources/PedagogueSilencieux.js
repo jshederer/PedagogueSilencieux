@@ -25,6 +25,43 @@ var reprise = false;
 var DB_remoteCouch = false;
 var DB_murmur = "";
 
+// Préparation de la page
+function preparer() {
+	console.log("Début lancement Pédagogue Silencieux");
+	var message=false;
+	try {
+		$("#titre").text(titre_questionnaire);
+		document.title = titre_questionnaire;
+	}
+	catch(error) {
+		console.error("Titre invalide");
+		console.error(error);
+		message=true;
+	}
+	try {
+		$("#quizz").text(message_questionnaire);
+	}
+	catch(error) {
+		console.error("Message invalide");
+		console.error(error);
+		message=true;
+	}
+
+	try {
+		console.log("Nombre de questions chargées:"+questions.length);
+		demarrrerQuestionnaire();
+	}
+	catch(error) {
+		console.error("Questions non chargées");
+		console.error(error);
+		message=true;
+	}
+	if(message)
+		$("#quizz").append("Problème d'utilisation du fichier des questions");
+	$("#waiting_icon").remove();
+	console.log("Fin lancement Pédagogue silencieux");
+}
+
 //Lecture des paramètres de page
 var resultat = [];
 var tmp = [];
@@ -38,33 +75,33 @@ location.search
 	});
 
 var fichier_parametre = false;
+var classe = "";
 for(var index in resultat) {
 	if(index == "file") {
-		$.getScript(resultat[index])
-			.done(function( script, textStatus ) {
-				console.log( textStatus );
-				fichier_parametre = true;
-			})
-			.fail(function( jqxhr, settings, exception ) {
-				$("#quizz").append("Problème de chargement des questions");
-				$("#quizz").append(exception);
-				console.log( settings );
-			});
+		fichier_parametre = resultat[index];
+	}
+	if(index == "classe") {
+		classe = resultat[index];
 	}
 }
-
 if(!fichier_parametre) {
-	$.getScript("./questions.json")
-		.done(function( script, textStatus ) {
-			console.log( textStatus );
-			fichier_parametre = true;
-		})
-		.fail(function( jqxhr, settings, exception ) {
-			$("#quizz").append("Problème de chargement des questions");
-			$("#quizz").append(exception);
-			console.log( settings );
-		});
+	fichier_parametre = "questions.json";
 }
+
+$.getScript(fichier_parametre)
+	.done(function( script, textStatus ) {
+		console.log( "Chargement des questions: fait" );
+		console.log( textStatus );
+		preparer();
+	})
+	.fail(function( jqxhr, settings, exception ) {
+		$("#quizz").append("Problème de chargement des questions:");
+		$("#quizz").append(exception);
+		console.log( "Chargement des questions: erreur" );
+		console.log( settings );
+		console.log( exception );
+		fichier_parametre = false;
+	});
 
 //Fonctions du quizz
 function ajouterQuestion(){
@@ -145,8 +182,8 @@ function demarrrerQuestionnaire() {
 					compteur_incorrectes = element.doc.compteur_incorrectes;
 					temps = element.doc.temps;
 
-					$("#titre").text(titre+" (Reprise)");
-					document.title = titre+" (Reprise)";
+					$("#titre").text(titre_questionnaire+" (Reprise)");
+					document.title = titre_questionnaire+" (Reprise)";
 				}
 				break;
 			}
@@ -273,6 +310,7 @@ function verifier(value) {
 		donnees._id = DB_date+DB_murmur;
 
 	}
+	//Sauvegarde données
 	DB.put(donnees,function callback(error, result) {
 		if (error) {
 			console.log("Pb sauvegarde DB"+DB_revision);
@@ -282,13 +320,16 @@ function verifier(value) {
 			console.log("Sauvegarde DB ok"+DB_revision);
 		}
 	});
+	//Remontée données
+	console.log("Classe:"+classe);
+	
+	
 	console.log("Réponses correctes:"+compteur_correctes);
 	console.log("Réponses incorrectes:"+compteur_incorrectes);
 	console.log("Score:"+score);
 }
 
 window.onload = function(e) {
-	console.log("Début lancement Pédagogue Silencieux");
 	if (window.requestIdleCallback) {
 		requestIdleCallback(function () {
 			Fingerprint2.get(function (components) {
@@ -306,31 +347,4 @@ window.onload = function(e) {
 			})  
 		}, 500)
 	}
-	
-	try {
-		$("#titre").text(titre);
-		document.title = titre;
-	}
-	catch(error) {
-		console.error("Titre invalide");
-		console.error(error);
-	}
-	try {
-		$("#quizz").text(message);
-	}
-	catch(error) {
-		console.error("Message invalide");
-		console.error(error);
-	}
-
-	try {
-		console.log("Nombre de questions chargées:"+questions.length);
-		demarrrerQuestionnaire();
-	}
-	catch(error) {
-		console.error("Questions non chargées");
-		console.error(error);
-	}
-	
-	console.log("Fin lancement Pédagogue silencieux");
 }
