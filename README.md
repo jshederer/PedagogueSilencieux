@@ -5,3 +5,5 @@ Une aide pour chaque question est affichée si le premier essai est infructueux.
 
 Les questions sont lues du fichier "questions.json". Le fichier "questions.json" de base permet d'utiliser une série de questions pour une initiation à Python. 
 Il suffit de fournir un autre fichier questions.json pour changer de domaine de questions.
+
+Test de l'outil disponible sur le site http://hedererjs.free.fr
