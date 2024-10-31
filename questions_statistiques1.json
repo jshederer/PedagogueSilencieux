@@ -13,9 +13,9 @@ var questions=[
 				lib_q='Dans un club de tennis de '+b+' adhérents, le nombre de juniors est de '+a; \
 				",
 		lib_q:"",
-		lib_r:"Quelle est la fréquence des juniors? (arrondi au dixième)",
+		lib_r:"Quelle est la fréquence décimale des juniors? (arrondi au dixième)",
 		r:false,
-		aide:"La fréquence est le quotient de l'effectif d'une valeur par l'effectif total",
+		aide:"La fréquence décimale est le quotient de l'effectif d'une valeur par l'effectif total",
 		correction:true
 	},
 	{
@@ -27,9 +27,9 @@ var questions=[
 				lib_q='Dans un club de football de '+a+' adhérents, le nombre de minimes est de '+b; \
 				",
 		lib_q:"",
-		lib_r:"Quelle est la fréquence des minimes? (arrondi au centième)",
+		lib_r:"Quelle est la fréquence décimale des minimes? (arrondi au centième)",
 		r:false,
-		aide:"La fréquence est le quotient de l'effectif d'une valeur par l'effectif total",
+		aide:"La fréquence décimale est le quotient de l'effectif d'une valeur par l'effectif total",
 		correction:true
 	},
 	{
@@ -41,7 +41,7 @@ var questions=[
 				lib_q='Dans un club de football de '+b+' adhérents, le nombre de juniors est de '+a; \
 				",
 		lib_q:"",
-		lib_r:"Quelle est la fréquence en pourcentage des cadets?  (arrondi à l'unité)",
+		lib_r:"Quelle est la fréquence en pourcentage des cadets? (arrondi à l'unité)",
 		r:false,
 		aide:"La fréquence en pourcentage est le quotient de l'effectif d'une valeur par l'effectif total multiplié par 100",
 		correction:true
@@ -55,9 +55,23 @@ var questions=[
 				lib_q='Dans un club de football de '+a+' adhérents, le nombre de cadets est de '+b; \
 				", 
 		lib_q:"",
-		lib_r:"Quelle est la fréquence en pourcentage des cadets?  (arrondi au dixième)",
+		lib_r:"Quelle est la fréquence en pourcentage des cadets? (arrondi au dixième)",
 		r:false,
 		aide:"La fréquence en pourcentage est le quotient de l'effectif d'une valeur par l'effectif total multiplié par 100",
+		correction:true
+	},
+	{
+		boucle: 3,
+		script: "\
+				var a = getRandomIntInclusive(60 , 90); \
+				var b = getRandomIntInclusive(150 , 600); \
+				resultat=getRound(100-a,0)+'%'; \
+				lib_q='Dans un club de football de '+b+' adhérents, le pourcentage de joueurs plus agés que les minimes est de '+a+'%'; \
+				", 
+		lib_q:"",
+		lib_r:"Quel est le pourcentage des minimes et plus jeunes? (arrondi à l'unité)",
+		r:false,
+		aide:"La somme des pourcentages est de 100% pour une répartition",
 		correction:true
 	},
 ];
